@@ -1,5 +1,9 @@
 module.exports = {
 
+	"AutoRemediateXX-001": {
+		"enabled": true
+	},
+
 	"AutoRemediateRDS-008": {
 		"enabled": true
 	},
