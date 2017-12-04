@@ -126,7 +126,7 @@ functions:
       Role: Auto Remediate testing
       Environment: Ops
     environment:
-      SNS_OUTCOME_TOPIC: arn:aws:sns:ap-southeast-2:870109809871:AutoRemediationOutcome
+      SNS_OUTCOME_TOPIC: arn:aws:sns:ap-southeast-2:613576916451:AutoRemediationOutcome
     package:
       include:
         - functions/AutoRemediateXX-001.js
