@@ -8,7 +8,7 @@ module.exports.handler = (event, context, callback) => {
 
 	console.log('Dummy remediation test - Received event:', JSON.stringify(event, null, 2));
 
-		if (!event || !event.resource || event.ruleId !== "xX-001") {
+		if (!event || !event.resource || event.ruleId !== "XX-001") {
 			return handleError("Invalid event");
 		}
 
@@ -25,6 +25,14 @@ module.exports.handler = (event, context, callback) => {
 
 		  if (err) {
 			  console.log(err, err.stack); // an error occurred
+				var params = {
+          Message: 'Success message', /* required */
+          TopicArn: 'arn:aws:sns:ap-southeast-2:613576916451:AutoRemediationOutcome'
+        };
+        sns.publish(params, function(err, data) {
+          if (err) console.log(err, err.stack); // an error occurred
+          else     console.log(data);           // successful response
+        });
 			}
 
 		  else {
