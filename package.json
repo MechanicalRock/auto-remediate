@@ -12,7 +12,9 @@
     "url": "ssh://git@github.com:cloudconformity/auto-remediate"
   },
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "aws-sdk": "^2.161.0"
+  },
   "devDependencies": {
     "@types/chai": "^3.5.1",
     "@types/mocha": "^2.2.41",
