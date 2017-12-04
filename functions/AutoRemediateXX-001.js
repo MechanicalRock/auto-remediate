@@ -26,7 +26,8 @@ module.exports.handler = (event, context, callback) => {
 		  if (err) {
 			  console.log(err, err.stack); // an error occurred
 				var params = {
-          Message: 'Success message', /* required */
+          Message: 'Error message',
+					Subject: "Error message From AutoRemediateXX-001",
           TopicArn: 'arn:aws:sns:ap-southeast-2:870109809871:AutoRemediationOutcome'
         };
         sns.publish(params, function(err, data) {
@@ -37,6 +38,15 @@ module.exports.handler = (event, context, callback) => {
 
 		  else {
         console.log(data);           // successful response
+				var params = {
+          Message: 'Success message',
+					Subject: "Success message From AutoRemediateXX-001",
+          TopicArn: 'arn:aws:sns:ap-southeast-2:870109809871:AutoRemediationOutcome'
+        };
+        sns.publish(params, function(err, data) {
+          if (err) console.log(err, err.stack); // an error occurred
+          else     console.log(data);           // successful response
+        });
 			}
 
 		});
