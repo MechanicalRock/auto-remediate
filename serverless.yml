@@ -92,6 +92,7 @@ provider:
     - Effect: Allow
       Action:
         - sns:ListTopics
+        - sns:Publish
       Resource: "*"
 
 package:
