@@ -27,7 +27,7 @@ module.exports.handler = (event, context, callback) => {
 			  console.log(err, err.stack); // an error occurred
 				var params = {
           Message: 'Success message', /* required */
-          TopicArn: 'arn:aws:sns:ap-southeast-2:613576916451:AutoRemediationOutcome'
+          TopicArn: 'arn:aws:sns:ap-southeast-2:870109809871:AutoRemediationOutcome'
         };
         sns.publish(params, function(err, data) {
           if (err) console.log(err, err.stack); // an error occurred
