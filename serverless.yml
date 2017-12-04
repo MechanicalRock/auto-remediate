@@ -89,6 +89,11 @@ provider:
         - cloudformation:UpdateTerminationProtection
       Resource: "*"
 
+    - Effect: Allow
+      Action:
+        - sns:ListTopics
+      Resource: "*"
+
 package:
   individually: true
 
@@ -123,7 +128,7 @@ functions:
     package:
       include:
         - functions/AutoRemediateXX-001.js
-        - node_modules/**
+        #- node_modules/**
 
   AutoRemediateCT-001:
     handler: functions/AutoRemediateCT-001.handler
