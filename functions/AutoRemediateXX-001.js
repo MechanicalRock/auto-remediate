@@ -29,7 +29,7 @@ module.exports.handler = (event, context, callback) => {
 			const params = {
 				Message: 'Error message',
 				Subject: "Error message From AutoRemediateXX-001",
-				TopicArn: 'arn:aws:sns:ap-southeast-2:870109_809871:AutoRemediationOutcome'
+				TopicArn: 'arn:aws:sns:ap-southeast-2:870109809871:AutoRemediationOutcome'
 			};
 
 			let snsPromise = sns.publish(params).promise();
@@ -48,7 +48,7 @@ module.exports.handler = (event, context, callback) => {
 			const params = {
 				Message: 'Success message',
 				Subject: "Success message From AutoRemediateXX-001",
-				TopicArn: 'arn:aws:sns:ap-southeast-2:870109_809871:AutoRemediationOutcome'
+				TopicArn: 'arn:aws:sns:ap-southeast-2:870109809871:AutoRemediationOutcome'
 			};
 
 			let snsPromise = sns.publish(params).promise();
