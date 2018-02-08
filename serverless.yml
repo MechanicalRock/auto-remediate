@@ -1,99 +1,86 @@
+---
 service: auto-remediate
-
 provider:
   name: aws
   runtime: nodejs6.10
   stage: v1
-  region: ${opt:AWS_REGION}
+  region: "${opt:AWS_REGION}"
   stackTags:
     service: auto-remediate
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - logs:CreateLogGroup
-      Resource:
-        - 'Fn::Join':
-          - ':'
-          -
-            - 'arn:aws:logs'
-            - Ref: 'AWS::Region'
-            - Ref: 'AWS::AccountId'
-            - '*'
-
-    - Effect: Allow
-      Action:
-        - logs:CreateLogStream
-        - logs:PutLogEvents
-        - logs:DescribeLogStream
-      Resource:
-        - 'Fn::Join':
-          - ':'
-          -
-            - 'arn:aws:logs'
-            - Ref: 'AWS::Region'
-            - Ref: 'AWS::AccountId'
-            - 'log-group:/aws/lambda/*:*:*'
-
-    - Effect: Allow
-      Action: "lambda:InvokeFunction"
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - rds:Describe*
-        - rds:ModifyDBInstance
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - s3:GetBucket*
-        - s3:PutBucketPolicy
-        - s3:PutBucketAcl
-      Resource: "*"
-
-    - Effect: Allow
-      Action: cloudtrail:UpdateTrail
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - config:Describe*
-        - config:Get*
-        - config:List*
-        - config:Put*
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - sts:GetCallerIdentity
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - config:PutConfigurationRecorder
-        - config:PutDeliveryChannel
-        - config:StartConfigurationRecorder
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - iam:AttachRolePolicy
-        - iam:CreateRole
-        - iam:GetRole
-        - iam:PassRole
-        - iam:PutRolePolicy
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - cloudformation:UpdateTerminationProtection
-      Resource: "*"
-
-    - Effect: Allow
-      Action:
-        - sns:ListTopics
-        - sns:Publish
-      Resource: "*"
+  - Effect: Allow
+    Action:
+    - logs:CreateLogGroup
+    Resource:
+    - Fn::Join:
+      - ":"
+      - - arn:aws:logs
+        - Ref: AWS::Region
+        - Ref: AWS::AccountId
+        - "*"
+  - Effect: Allow
+    Action:
+    - logs:CreateLogStream
+    - logs:PutLogEvents
+    - logs:DescribeLogStream
+    Resource:
+    - Fn::Join:
+      - ":"
+      - - arn:aws:logs
+        - Ref: AWS::Region
+        - Ref: AWS::AccountId
+        - log-group:/aws/lambda/*:*:*
+  - Effect: Allow
+    Action: lambda:InvokeFunction
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - rds:Describe*
+    - rds:ModifyDBInstance
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - s3:GetBucket*
+    - s3:PutBucketPolicy
+    - s3:PutBucketAcl
+    Resource: "*"
+  - Effect: Allow
+    Action: cloudtrail:UpdateTrail
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - config:Describe*
+    - config:Get*
+    - config:List*
+    - config:Put*
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - sts:GetCallerIdentity
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - config:PutConfigurationRecorder
+    - config:PutDeliveryChannel
+    - config:StartConfigurationRecorder
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - iam:AttachRolePolicy
+    - iam:CreateRole
+    - iam:GetRole
+    - iam:PassRole
+    - iam:PutRolePolicy
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - cloudformation:UpdateTerminationProtection
+    Resource: "*"
+  - Effect: Allow
+    Action:
+    - sns:ListTopics
+    - sns:Publish
+    Resource: "*"
 
 package:
   individually: true
@@ -105,9 +92,9 @@ functions:
     timeout: 10
     memorySize: 128
     events:
-      - sns:
-          topicName: CloudConformity
-          displayName: CloudConformity topic
+    - sns:
+        topicName: CloudConformity
+        displayName: CloudConformity topic
     tags:
       Name: Auto Remediate Orchestrator
       Owner: CloudConformity
@@ -115,8 +102,8 @@ functions:
       Environment: Ops
     package:
       include:
-        - functions/AutoRemediateOrchestrator.js
-        - node_modules/**
+      - functions/AutoRemediateOrchestrator.js
+      - node_modules/**
 
   AutoRemediateXX-001:
     handler: functions/AutoRemediateXX-001.handler
@@ -130,8 +117,7 @@ functions:
       SNS_OUTCOME_TOPIC: arn:aws:sns:ap-southeast-2:870109809871:AutoRemediationOutcome
     package:
       include:
-        - functions/AutoRemediateXX-001.js
-        #- node_modules/**
+      - functions/AutoRemediateXX-001.js
 
   AutoRemediateCT-001:
     handler: functions/AutoRemediateCT-001.handler
@@ -199,3 +185,4 @@ functions:
       include:
         - functions/AutoRemediateCFM-005.js
         - node_modules/**
+
