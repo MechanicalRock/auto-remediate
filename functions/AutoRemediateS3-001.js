@@ -22,8 +22,9 @@ module.exports.handler = (event, context, callback) => {
 
   getAclPromise
     .then((data) => {
-       console.log(data);
-       console.log(data.grants);
+      console.log(JSON.stringify(data));
+      console.log(JSON.stringify(data.grants));
+      console.log(JSON.stringify(data.Grants.Grantee));
      })
     .catch((err) => { console.log(err, err.stack) });
 
@@ -36,8 +37,9 @@ module.exports.handler = (event, context, callback) => {
 
   putAclPromise
     .then((data) => {
-       console.log(data);
-       console.log(data.grants);
+      console.log(JSON.stringify(data));
+      console.log(JSON.stringify(data.grants));
+      console.log(JSON.stringify(data.Grants.Grantee));
      })
     .catch((err) => {
       console.log(err, err.stack);
