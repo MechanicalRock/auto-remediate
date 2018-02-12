@@ -6,7 +6,7 @@ module.exports = {
 
 	"AutoRemediateS3-001": {
 		"enabled": false
-  },
+        },
 
 	"AutoRemediateS3-012": {
 		"enabled": false
