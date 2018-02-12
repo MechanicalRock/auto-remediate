@@ -4,22 +4,24 @@ const config = require('./config');
 const AWS    = require("aws-sdk");
 
 const allUsersURI           = 'http://acs.amazonaws.com/groups/global/AllUsers'
-const fullControlPermission = "FULL_CONTROL"
+//const fullControlPermission = "FULL_CONTROL"
 const readPermission        = "READ"
-const allUsersWriteAcp      = JSON.parse('{ "Grantee": { "Type": "Group", "URI": "http://acs.amazonaws.com/groups/global/AllUsers" }, "Permission": "WRITE_ACP" }')
-const allUsersWrite         = JSON.parse('{ "Grantee": { "Type": "Group", "URI": "http://acs.amazonaws.com/groups/global/AllUsers" }, "Permission": "WRITE" }')
-const allUsersReadAcp       = JSON.parse('{ "Grantee": { "Type": "Group", "URI": "http://acs.amazonaws.com/groups/global/AllUsers" }, "Permission": "READ_ACP" }')
+//const allUsersWriteAcp      = JSON.parse('{ "Grantee": { "Type": "Group", "URI": "http://acs.amazonaws.com/groups/global/AllUsers" }, "Permission": "WRITE_ACP" }')
+//const allUsersWrite         = JSON.parse('{ "Grantee": { "Type": "Group", "URI": "http://acs.amazonaws.com/groups/global/AllUsers" }, "Permission": "WRITE" }')
+//const allUsersReadAcp       = JSON.parse('{ "Grantee": { "Type": "Group", "URI": "http://acs.amazonaws.com/groups/global/AllUsers" }, "Permission": "READ_ACP" }')
 
 function remediateAllUsers(thisGrant, newAcl) {
-  if (thisGrant.Permission == fullControlPermission) { // in this case, apply all permission except READ
-    newAcl['Grants'].push(allUsersWrite);
-    newAcl['Grants'].push(allUsersReadAcp);
-    newAcl['Grants'].push(allUsersWriteAcp);
-  }
-  else if (thisGrant.Permission == readPermission) {  // do not pass through
-  }
-  else {
-    newAcl['Grants'].push(thisGrant);
+//  if (thisGrant.Permission == fullControlPermission) { // in this case, apply all permission except READ
+//    newAcl['Grants'].push(allUsersWrite);
+//    newAcl['Grants'].push(allUsersReadAcp);
+//    newAcl['Grants'].push(allUsersWriteAcp);
+//  }
+//  else 
+  if (thisGrant.Permission != readPermission) {  // do not pass through
+     newAcl['Grants'].push(thisGrant);
+//  }
+//  else {
+//    newAcl['Grants'].push(thisGrant);
   }
 
   return newAcl;
