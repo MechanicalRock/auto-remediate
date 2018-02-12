@@ -103,21 +103,8 @@ provider:
 
 package:
   individually: true
-  include:
-    - "lib/*"
-    - "node_modules/firebase/**"
-    - "node_modules/bluebird/**"
-    - "node_modules/moment/**"
-    - "node_modules/oauth/**"
-    - "node_modules/dotenv/**"
-    - "node_modules/lodash/**"
-  exclude:
-    - "*.mp3"
-    - "test/*"
-    - "src/*"
-    - ".git/**"
-    - ".serverless/*.zip"
-    - "node_modules/**"
+ exclude:
+   - "node_modules/**"
 
 functions:
 
